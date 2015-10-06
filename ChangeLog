@@ -1,0 +1,136 @@
+---------------------------------------
+         version 0.8
+---------------------------------------
+
+
+Ven nov 16 17:11:38 CET 2007 - marc
+- synchro after HD crash
+
+September  - marc
+- added rse2 which is just a solver based on lsqr with dense matrix
+  (use ctl-c to stop computation and write solution)
+
+* Ven déc 15 21:10:53 CET 2006 - marc
+- synchro with between linux and macosX
+- Take care of Makefile.am which is a link to
+  Makefile.unix or Makefile.macosx
+
+* Mon Jul 10 16:02:42 CEST 2006 - marc
+- version 0.8
+- use sparse lib ({matrice,sparse}.{c,h} moved)
+- shows lib used
+- fixed memory comsumption on MACOSX
+
+---------------------------------------
+         version 0.7
+---------------------------------------
+* mar mar 22 16:34:42 CET 2005 - marc
+- sparse matrix regularisation whith irregular neighbourhood
+
+* ven mar 18 17:36:21 CET 2005 - marc
+- compression mode && DtD are working together
+
+* Wed Mar 16 16:21:26 CET 2005 - marc
+- print booth dslowness and %velocity
+
+* lun mar 14 17:39:30 CET 2005 - marc
+- fixed sign problem with velocities
+- add some stats on sparse matrix
+
+* dim mar 13 18:40:58 CET 2005 - marc
+- version 0.7
+- implement neighbours damping 
+- compute variance reduction
+
+---------------------------------------
+         version 0.6
+---------------------------------------
+
+* Mon Mar  7 13:16:34 CET 2005 - marc
+- version 0.6
+- sparse matrix can be set to use column link
+- bug fixed when vmodel was noty provided
+
+---------------------------------------
+         version 0.5
+---------------------------------------
+
+* ven fév 25 23:58:35 CET 2005 - marc
+- add '-c' flag to force sparse matrix check
+
+* jeu fév 24 21:52:36 CET 2005 - marc
+- ctrl-c interupt the computation after the current iteration 
+  then save the result at the current state
+
+---------------------------------------
+         version 0.4
+---------------------------------------
+
+* dim fév 20 10:37:36 CET 2005 - marc
+  - reworked read_*() 
+  - read_subvector fixed (nb of items)
+
+* jeu fév 17 11:03:09 CET 2005 - marc
+  - version 0.4
+  - add velocity model reading to write cell velocity 
+    in sco file
+  - removed memleak [valgrind]
+
+---------------------------------------
+         version 0.3
+---------------------------------------
+* lun jan 24 14:50:32 CET 2005 - marc
+  - free_sparse_matrix mem leak fixed
+
+* lun jan 10 18:02:13 CET 2005 - marc
+  - bug fixed parsing -l option (log)
+  - bug fixed parsing -d option (damping)
+
+* mer nov 17 15:29:11 CET 2004 - marc
+  - ACH tomographic inversion is working
+  - add --ach
+  
+* mer nov 10 17:19:18 CET 2004 - marc
+  - version 0.3
+  - add 'ACH' - relative traveltime tomo
+
+---------------------------------------
+         version 0.2
+---------------------------------------
+
+* mer oct 20 16:39:54 CEST 2004 - marc
+  - print out lsqr return code
+  - speed up sparse stuff
+  - res importation fixed
+  - output files fixed
+  
+* ven oct 15 11:23:14 CEST 2004 - marc
+  - save an xml output file with enrichied SCO data section 
+
+* jeu oct 14 00:44:48 CEST 2004 - marc
+  - full sync with libmesh 1.0.pre1
+  - partial sync with libmesh 1.0.pre1
+
+* mar oct 12 16:06:56 CEST 2004 - marc
+  - update solution when using irregular mesh
+
+* lun oct 11 13:56:23 CEST 2004 - marc
+  - lsqrsolve can import sparse matrix chunks (ie. gimbos output)
+  - can import also .irm (irregular mesh)  files
+  
+* ven oct  8 17:35:27 CEST 2004 - marc
+  - compress null column
+
+* mer oct  6 19:02:54 CEST 2004 - marc
+  - implement sparse write to file
+
+* lun sep 20 15:56:48 CEST 2004 - marc
+  - add 3D vtk output 
+  - version set to 0.2
+  
+---------------------------------------
+         version 0.1
+---------------------------------------
+
+* mer sep 15 15:33:03 CEST 2004 - marc
+  - packaging

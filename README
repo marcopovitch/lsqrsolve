@@ -1,0 +1,56 @@
+This package can solve large sparse linear system and sparse least squares 
+problems and allows positive "damping".
+The core algorithms (lsqr.c lsqr.h) are provided by SOL (System Optimisation 
+Laboratory), from Stanford University. The source code from C. C. Paige and
+M. A. Saunders is avalaible here :
+	http://www.stanford.edu/group/SOL/software.html
+
+We have added and wrapped around a sparse matrix implementation 
+using linked list (row and column) of non nul elements, to speed up things.
+We use these tools for sesimic travel time tomography purpose.
+
+lsqrsolve code is very specific tools (works with ray2mesh) but 
+we provide also some samples code (rse, rse2, rse3) which implement generic
+lsqr solver Ax=B (A could be sparse or not)  in command line.
+
+Sparse 
+------
+file format for sparse matrix (A) (only value!=0 should be set)
+
+ni nj
+i j value
+...
+
+file format for vector (B)
+
+nj
+value[0]
+...
+value[j-1]
+
+
+all indices i and j start with '0' and not '1'.
+
+
+Example
+-------
+
+	rse3 sparseA.txt B.txt x.txt nbiter_max damping [dump_sol_iter]
+
+where
+sparseA.txt   : sparse matrix in input
+B.txt         : standard vector in input
+x.txt         : solution in output
+nbiter_max    : nb maximun iteration to perform
+damping       : damping value in input
+dump_sol_iter : dump solution for each dump_sol_iter ieration in iter-%d.txt file (optional)
+
+
+When using sparse matrix please sort your data first ! It speeds up things !!
+You can use the sort unix command line utility :
+
+	sort -n -k1 -k2.1n sparseA.txt > sparseA-sorted.txt
+
+
+
+Marc Grunberg <marc.grunberg at unistra.fr>

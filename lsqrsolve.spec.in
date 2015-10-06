@@ -1,0 +1,50 @@
+# Note that this is NOT a relocatable package
+# defaults for redhat
+%define prefix		/usr
+%define sysconfdir	/etc
+%define  release        1
+
+Summary: solve large equations system using sparse matrix
+
+Name: @PACKAGE@
+Version: @VERSION@
+Release: %release
+Copyright: GPL
+Group: Applications/Sciences
+URL: http://guenievre.u-strasbg.fr/nightly/
+Source: %{name}-%{version}.tar.gz 
+
+Packager: Marc Grunberg <marc@renass.u-strasbg.fr>
+BuildRoot: /var/tmp/%{name}-%{version}-root
+
+%description
+solve large equations system using sparse matrix
+
+%prep
+%setup -q
+ARGUMTS="$ARCH_FLAGS --prefix=%{prefix} --sysconfdir=%{sysconfdir} --datadir=%{prefix}/share --mandir=%{prefix}/share/man"
+
+if [ ! -f configure ]; then
+  CFLAGS="$RPM_OPT_FLAGS" ./autogen.sh $ARGUMTS 
+else
+  CFLAGS="$RPM_OPT_FLAGS" ./configure $ARGUMTS
+fi
+
+%build
+#./configure $ARCH_FLAGS --prefix=%{prefix}
+make
+
+%install
+make DESTDIR=$RPM_BUILD_ROOT install
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%files
+%defattr(-,root,root)
+%doc AUTHORS COPYING ChangeLog INSTALL NEWS README TODO
+%config 
+%{prefix}/bin/lsqrsolve
+
+###################################################################
+%changelog
