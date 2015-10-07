@@ -11,7 +11,7 @@ lsqrsolve code is a very specific tool (may works with *ray2mesh*) but
 I provide also some sample codes (rse, rse2, rse3) which implement generic
 lsqr solver :
 
-`A x = B
+`A x = B`
 
 (A could be sparse or not) in command line.
 
