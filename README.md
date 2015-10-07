@@ -9,11 +9,7 @@ I have added and wrapped around a *[sparse](https://github.com/marcopovitch/spar
 
 lsqrsolve code is a very specific tool (may works with *ray2mesh*) but 
 I provide also some sample codes (rse, rse2, rse3) which implement generic
-lsqr solver :
-
-`A x = B`
-
-(A could be sparse or not) in command line.
+lsqr solver `A x = B` (A could be sparse or not) in command line.
 
 Use also *[mesh](https://github.com/marcopovitch/mesh)* and *[sparse](https://github.com/marcopovitch/sparse)* libraries.
 
