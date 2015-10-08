@@ -25,6 +25,7 @@ So far, no code parallelization (should be easy).
 ### prerequisite
 
 Install the *[mesh](https://github.com/marcopovitch/mesh)* (trying to remove that dependency ) and *[sparse](https://github.com/marcopovitch/sparse)* libraries following the steps decribed in each relating README.md files. 
+Parsing command line library [popt](http://directory.fsf.org/wiki/Popt) is also mandatory.
 
 ### lsqrsolve compilation  
 
@@ -32,14 +33,23 @@ To make all the needed *autotools* files, go into the `lsqrsolve` directory run:
 
 `glibtoolize -i`
 
-To configure and install the lsqrsolve files in your installation directory $INSTALL_PATH, run:
+To configure and install the lsqrsolve files in your installation directory INSTALL_PATH, run:
 
-`./autogen.sh --with-mesh-prefix=$MESH_INSTALL_PATH --prefix=$INSTALL_PATH`
+<pre>
+./autogen.sh --with-mesh-prefix=$MESH_INSTALL_PATH     \
+             --with-sparse-prefix=$SPARSE_INSTALL_PATH \ 
+             --with-popt-prefix=POPT_INSTALL_PATH      \
+             --enable-doc                              \
+             --prefix=$INSTALL_PATH`
 
-`make install`
+make install
+</pre>
  
+If you don't want the documenatation to be generated you can remove `--enable-doc`. 
+
  
 # Files format
+
 <pre>
 A x = B
 </pre>
