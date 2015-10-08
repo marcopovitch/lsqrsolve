@@ -7,52 +7,87 @@ LT_INIT
 AC_CONFIG_MACRO_DIRS([m4])
 
 dnl ------------------------------------------------------------------------------------- 
-dnl                mesh library and headers information  
+dnl                SPARSE library and headers information
+dnl ------------------------------------------------------------------------------------- 
+dnl ---- allows to specify a different prefix PATH for sparse libray
+AC_ARG_WITH(sparse-prefix,
+            [  --with-sparse-prefix=PREFIX Where your libsparse was installed (e.g. /usr/local/)])
+if test -n "${with_sparse_prefix}"; then
+    extra_ld="${extra_ld} -L${with_sparse_prefix}/lib"
+    extra_inc="${extra_inc} -I${with_sparse_prefix}/include"
+fi
+echo ${with_sparse_prefix}
+
+dnl ----- now assert if we must check for libs and headers.
+if test "x${with_sparse_prefix}" = "x"; then
+    dnl ---------------------------------------------------------------------
+    dnl                 Checks for sparse presence
+    dnl ---------------------------------------------------------------------
+    AC_CHECK_LIB(sparse,libsparseversion,
+        echo "+------------------------------------------------------------+";
+        echo "| libsparse found. Good. using it.                             |";
+        echo "+------------------------------------------------------------+",
+
+        echo "+------------------------------------------------------------+";
+        echo "| libsparse is badly or not installed. Will not build !        |";
+        echo "+------------------------------------------------------------+",)
+
+    dnl ---- check presence of headers
+    AC_CHECK_HEADERS(sparse/sparse.h,
+        echo "+------------------------------------------------------------+";
+        echo "| headers files for libsparse found.                           |";
+        echo "+------------------------------------------------------------+",
+
+        echo "+------------------------------------------------------------+";
+        echo "| headers files for libsparse not found. Wont build.           |";
+        echo "+------------------------------------------------------------+")
+fi
+
+dnl ------------------------------------------------------------------------------------- 
+dnl                mesh library and headers information
 dnl ------------------------------------------------------------------------------------- 
 dnl ---- allows to specify a different prefix PATH for mesh libray
 AC_ARG_WITH(mesh-prefix,
             [  --with-mesh-prefix=PREFIX Where your libmesh was installed (e.g. /usr/local/)])
-	if test -n "${with_mesh_prefix}"; then
-		extra_ld="${extra_ld} -L${with_mesh_prefix}/lib"
-		extra_inc="${extra_inc} -I${with_mesh_prefix}/include"
-	fi
-
-dnl ----- now assert if we must check for libs and headers. 
-if test "x${with_mesh_prefix}" = "x"; then
-dnl ---------------------------------------------------------------------
-dnl                 Checks for mesh presence 
-dnl ---------------------------------------------------------------------
-
-AC_CHECK_LIB(mesh,mesh_init_from_file,
-       echo "+------------------------------------------------------------+";
-      echo "| libmesh found. Good. using it.                             |";
-       echo "+------------------------------------------------------------+",
-       echo "+------------------------------------------------------------+";
-       echo "| libmesh is badly or not installed. Will not build !        |";
-       echo "+------------------------------------------------------------+",
-	 )
-
-dnl ---- check presence of headers 
-AC_CHECK_HEADERS(mesh/mesh.h,
-       echo "+------------------------------------------------------------+";
-	 echo "| headers files for libmesh found.                           |";
-       echo "+------------------------------------------------------------+",
-       echo "+------------------------------------------------------------+";
-	 echo "| headers files for libmesh not found. Wont build.           |";
-       echo "+------------------------------------------------------------+")
+if test -n "${with_mesh_prefix}"; then
+    extra_ld="${extra_ld} -L${with_mesh_prefix}/lib"
+    extra_inc="${extra_inc} -I${with_mesh_prefix}/include"
 fi
 
+dnl ----- now assert if we must check for libs and headers.
+if test "x${with_mesh_prefix}" = "x"; then
+    dnl ---------------------------------------------------------------------
+    dnl                 Checks for mesh presence
+    dnl ---------------------------------------------------------------------
+    AC_CHECK_LIB(mesh,mesh_init_from_file,
+        echo "+------------------------------------------------------------+";
+        echo "| libmesh found. Good. using it.                             |";
+        echo "+------------------------------------------------------------+",
+        echo "+------------------------------------------------------------+";
+        echo "| libmesh is badly or not installed. Will not build !        |";
+        echo "+------------------------------------------------------------+",)
+
+    dnl ---- check presence of headers 
+    AC_CHECK_HEADERS(mesh/mesh.h,
+        echo "+------------------------------------------------------------+";
+        echo "| headers files for libmesh found.                           |";
+        echo "+------------------------------------------------------------+",
+        echo "+------------------------------------------------------------+";
+        echo "| headers files for libmesh not found. Wont build.           |";
+        echo "+------------------------------------------------------------+")
+fi
 
 dnl ------------------------------------------------------------------------------------- 
 dnl                popt location  
 dnl ------------------------------------------------------------------------------------- 
 dnl ---- allows to specify a different prefix PATH for libray
 AC_ARG_WITH(popt-prefix,
-      [--with-popt-prefix=PREFIX Where your popt library was installed (e.g. /usr/local/)])
-      if test -n "${with_popt_prefix}"; then
-	              extra_ld="-L${with_popt_prefix}/lib"
-	              extra_inc="-I${with_popt_prefix}/include"
-      fi
+            [  --with-popt-prefix=PREFIX Where your popt library was installed (e.g. /usr/local/)])
+
+if test -n "${with_popt_prefix}"; then
+    extra_ld="-L${with_popt_prefix}/lib"
+    extra_inc="-I${with_popt_prefix}/include"
+fi
 
 
 pkgconfig_invoke="pkg-config"
