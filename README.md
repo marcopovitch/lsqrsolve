@@ -45,7 +45,7 @@ To configure and install the lsqrsolve files in your installation directory INST
 make install
 </pre>
  
-If you don't want the documenatation to be generated you can remove `--enable-doc`. 
+If you don't want the documentation to be generated you can remove `--enable-doc`. 
 
  
 # Files format
